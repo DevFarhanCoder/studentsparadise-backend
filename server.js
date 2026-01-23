@@ -33,6 +33,17 @@ app.get("/api/health", (req, res) => {
   });
 });
 
+// Robots.txt route - Allow all crawlers
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain");
+  res.send(`User-agent: *
+Allow: /
+
+# Allow crawling of all API endpoints
+Allow: /api/
+Allow: /uploads/`);
+});
+
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({
