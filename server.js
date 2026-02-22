@@ -22,6 +22,7 @@ mongoose
 
 // Routes
 app.use("/api/enquiries", require("./routes/enquiries"));
+app.use("/api/it-enquiries", require("./routes/itEnquiries"));
 app.use("/api/documents", require("./routes/documents"));
 
 // Health check route
