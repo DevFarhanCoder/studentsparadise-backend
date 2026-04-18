@@ -69,4 +69,22 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
   console.log(`📡 API URL: http://localhost:${PORT}`);
+
+  // Keep-alive ping to prevent Render free tier from sleeping
+  if (process.env.RENDER_EXTERNAL_URL) {
+    const keepAliveUrl = `${process.env.RENDER_EXTERNAL_URL}/api/health`;
+    setInterval(
+      () => {
+        require("https")
+          .get(keepAliveUrl, (res) => {
+            console.log(`♻️  Keep-alive ping: ${res.statusCode}`);
+          })
+          .on("error", (err) => {
+            console.error("Keep-alive ping failed:", err.message);
+          });
+      },
+      14 * 60 * 1000
+    ); // ping every 14 minutes
+    console.log(`⏰ Keep-alive enabled for ${keepAliveUrl}`);
+  }
 });
