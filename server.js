@@ -23,6 +23,7 @@ mongoose
 // Routes
 app.use("/api/enquiries", require("./routes/enquiries"));
 app.use("/api/it-enquiries", require("./routes/itEnquiries"));
+app.use("/api/demo-bookings", require("./routes/demoBookings"));
 app.use("/api/documents", require("./routes/documents"));
 app.use("/api/scholarship-responses", require("./routes/scholarship"));
 
