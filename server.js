@@ -8,8 +8,8 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
 // Serve uploaded files statically
 app.use("/uploads", express.static("uploads"));
@@ -26,6 +26,7 @@ app.use("/api/it-enquiries", require("./routes/itEnquiries"));
 app.use("/api/demo-bookings", require("./routes/demoBookings"));
 app.use("/api/documents", require("./routes/documents"));
 app.use("/api/scholarship-responses", require("./routes/scholarship"));
+app.use("/api/resume", require("./routes/resumePDF"));
 
 // Health check route
 app.get("/api/health", (req, res) => {
